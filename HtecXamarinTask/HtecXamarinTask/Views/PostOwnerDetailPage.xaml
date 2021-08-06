@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage  
+    xmlns:base="clr-namespace:HtecXamarinTask.Views" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HtecXamarinTask.Views.PostOwnerDetailPage"
+    xmlns:resources="clr-namespace:HtecXamarinTask.Resources"
+    Title="{x:Static resources:AppResource.Detail}">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto" Margin="10">
+            <Label Grid.Row="0" Text="{x:Static resources:AppResource.PostOwner}" FontAttributes="Italic"/>
+            <Frame Grid.Row="1">
+                <StackLayout>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Name}" FontAttributes="Bold"/>
+                                <Span Text=":  "/>
+                                <Span Text="{Binding User.Name}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static resources:AppResource.Email}" FontAttributes="Bold"/>
+                                <Span Text=":  "/>
+                                <Span Text="{Binding User.Email}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Label Grid.Row="2" Text="{x:Static resources:AppResource.PostData}" FontAttributes="Italic"/>
+            <Frame Grid.Row="3">
+                <StackLayout Spacing="15">
+                    <Label Text="{Binding Post.Title}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="20"/>
+                    <Label Text="{Binding Post.Body}"/>
+                </StackLayout>
+            </Frame>
+            <Button Grid.Row="4" Text="{x:Static resources:AppResource.Delete}" Command="{Binding DeletePostCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</base:BasePage>

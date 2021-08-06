@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:HtecXamarinTask.Views"
+       xmlns:constants="clr-namespace:HtecXamarinTask.Constants"
+       xmlns:resources="clr-namespace:HtecXamarinTask.Resources"
+       Title="HtecXamarinTask"
+       FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource LightBackgroundColor}, Dark={StaticResource DarkBackgroundColor}}"
+       x:Class="HtecXamarinTask.AppShell">
+    <Shell.Resources>
+        <ResourceDictionary>
+            
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource LightPrimaryColor}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource WhiteColor}" />
+            </Style>
+
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+            </Style>
+
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightPrimaryColor}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource WhiteColor}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <FlyoutItem>
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="Material" Glyph="{x:Static constants:MaterialDesignFontCodes.ViewList}"/>
+        </FlyoutItem.Icon>
+        <ShellContent Route="PostsPage" ContentTemplate="{DataTemplate local:PostsPage}" />
+    </FlyoutItem>
+
+    <MenuItem Text="{x:Static resources:AppResource.Quit}"
+              Clicked="MenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource FontFamily="Material" Glyph="{x:Static constants:MaterialDesignFontCodes.ExitToApp}" Color="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}"/>
+        </MenuItem.IconImageSource>
+    </MenuItem>
+
+</Shell>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HtecXamarinTask.App">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--  App Colors  -->
+            <Color x:Key="WhiteColor">#ffffff</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+
+            <!--  Light colors  -->
+            <Color x:Key="LightPrimaryColor">#1b807e</Color>
+            <Color x:Key="LightPrimaryTextColor">#000000</Color>
+            <Color x:Key="LightBackgroundColor">#ededed</Color>
+            <Color x:Key="LightFrameBackgroundColor">#ffffff</Color>
+
+            <!--  Dark colors  -->
+            <Color x:Key="DarkPrimaryColor">#212121</Color>
+            <Color x:Key="DarkPrimaryTextColor">#ffffff</Color>
+            <Color x:Key="DarkBackgroundColor">#212121</Color>
+            <Color x:Key="DarkFrameBackgroundColor">#292929</Color>
+
+            <!--  Implicit styles  -->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource LightPrimaryColor}"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightFrameBackgroundColor}, Dark={StaticResource DarkFrameBackgroundColor}}"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Color" Value="{StaticResource LightPrimaryColor}"/>
+            </Style>
+            
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

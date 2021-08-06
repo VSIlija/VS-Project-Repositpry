@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage 
+    xmlns:base="clr-namespace:HtecXamarinTask.Views" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="HtecXamarinTask.Views.PostsPage"
+    xmlns:converters="clr-namespace:HtecXamarinTask.Converters"
+    xmlns:constants="clr-namespace:HtecXamarinTask.Constants"
+    xmlns:resources="clr-namespace:HtecXamarinTask.Resources"
+    NavigationPage.HasNavigationBar="false"
+    Title="{x:Static resources:AppResource.Posts}">
+    <base:BasePage.Resources>
+        <converters:RemoveNewLinesFromStringConverter x:Key="RemoveNewLinesFromStringConverter"/>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </base:BasePage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="{x:Static constants:MaterialDesignFontCodes.Refresh}" 
+                FontFamily="Material"
+                FontSize="30"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ReloadPostsCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <CollectionView 
+                    ItemsSource="{Binding Posts}" 
+                    SelectionMode="Single" 
+                    SelectionChangedCommand="{Binding OnPostSelectedCommand}" 
+                    SelectedItem="{Binding SelectedPost}"
+                    Margin="10,0"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="10" Padding="10" >
+                                <StackLayout>
+                                    <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                                    <Label 
+                                        Text="{Binding Body,Converter={StaticResource RemoveNewLinesFromStringConverter}}" 
+                                        MaxLines="1" 
+                                        LineBreakMode="TailTruncation"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</base:BasePage>
